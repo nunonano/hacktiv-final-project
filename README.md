@@ -14,6 +14,10 @@
 ## Starting Apps
 
 ```
+swag init --parseDependency --parseInternal
+```
+
+```
 make run
 ```
 

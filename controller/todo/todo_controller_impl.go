@@ -33,7 +33,7 @@ func (controller *TodoControllerImpl) GetById(c *gin.Context) {
 			Data:    nil,
 		}
 	} else {
-		todo := controller.TodoService.GetById(c, id)
+		todo := controller.TodoService.GetById(c, uint(id))
 		apiResponse = api.ApiResponse{
 			Code:    http.StatusOK,
 			Message: "OK",
@@ -92,7 +92,7 @@ func (controller *TodoControllerImpl) Update(c *gin.Context) {
 
 	c.ShouldBindJSON(&TodoRequest)
 
-	todoResponse := controller.TodoService.Update(c, id, TodoRequest)
+	todoResponse := controller.TodoService.Update(c, uint(id), TodoRequest)
 
 	apiResponse = api.ApiResponse{
 		Code:    http.StatusAccepted,
@@ -115,7 +115,7 @@ func (controller *TodoControllerImpl) Delete(c *gin.Context) {
 			Data:    nil,
 		}
 	} else {
-		todo := controller.TodoService.Delete(c, id)
+		todo := controller.TodoService.Delete(c, uint(id))
 		apiResponse = api.ApiResponse{
 			Code:    http.StatusAccepted,
 			Message: "Deleted",

@@ -15,7 +15,7 @@ func InitCategoryRepository() TodoRepository {
 	return &TodoRepositoryImpl{}
 }
 
-func (repository *TodoRepositoryImpl) Delete(ctx context.Context, db *gorm.DB, todoId int) (int, error) {
+func (repository *TodoRepositoryImpl) Delete(ctx context.Context, db *gorm.DB, todoId uint) (uint, error) {
 	var todo entity.Todo
 	err := db.Delete(&todo, todoId).Error
 	if err != nil {
@@ -24,8 +24,8 @@ func (repository *TodoRepositoryImpl) Delete(ctx context.Context, db *gorm.DB, t
 	return todoId, nil
 }
 
-func (repository *TodoRepositoryImpl) Update(ctx context.Context, db *gorm.DB, todoId int, todo entity.Todo) entity.Todo {
-	todo.Id = todoId
+func (repository *TodoRepositoryImpl) Update(ctx context.Context, db *gorm.DB, todoId uint, todo entity.Todo) entity.Todo {
+	todo.ID = todoId
 	db.Model(&todo).Where("id = ?", todoId).Updates(&todo)
 	return todo
 }
@@ -35,7 +35,7 @@ func (repository *TodoRepositoryImpl) Create(ctx context.Context, db *gorm.DB, t
 	return todo
 }
 
-func (repository *TodoRepositoryImpl) GetById(ctx context.Context, db *gorm.DB, todoId int) (entity.Todo, error) {
+func (repository *TodoRepositoryImpl) GetById(ctx context.Context, db *gorm.DB, todoId uint) (entity.Todo, error) {
 	var todo entity.Todo
 	err := db.First(&todo, todoId).Error
 	if err != nil {

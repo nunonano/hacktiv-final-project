@@ -30,13 +30,13 @@ func InitTodoService(todoRepository repository.TodoRepository, DB *gorm.DB) Todo
 // @Success 200 {array} entity.Todo
 // @Param id path int true "Todo ID"
 // @Router /todo/{id} [delete]
-func (service *TodoServiceImpl) Delete(ctx context.Context, todoId int) api.TodoResponse {
+func (service *TodoServiceImpl) Delete(ctx context.Context, todoId uint) api.TodoResponse {
 	todoId, err := service.TodoRepository.Delete(ctx, service.DB, todoId)
 	if err != nil {
 		return api.TodoResponse{}
 	} else {
 		return api.TodoResponse{
-			Id: todoId,
+			ID: todoId,
 		}
 	}
 }
@@ -50,7 +50,7 @@ func (service *TodoServiceImpl) Delete(ctx context.Context, todoId int) api.Todo
 // @Param id path int true "Todo ID"
 // @Param data body entity.Todo true "Update Data Todo"
 // @Router /todo/{id} [put]
-func (service *TodoServiceImpl) Update(ctx context.Context, todoId int, request api.TodoRequest) api.TodoResponse {
+func (service *TodoServiceImpl) Update(ctx context.Context, todoId uint, request api.TodoRequest) api.TodoResponse {
 
 	todo := entity.Todo{
 		Name: request.Name,
@@ -60,7 +60,7 @@ func (service *TodoServiceImpl) Update(ctx context.Context, todoId int, request 
 
 	return api.TodoResponse{
 		Name: todo.Name,
-		Id:   todo.Id,
+		ID:   todo.ID,
 	}
 }
 
@@ -82,7 +82,7 @@ func (service *TodoServiceImpl) Create(ctx context.Context, request api.TodoRequ
 
 	return api.TodoResponse{
 		Name: todo.Name,
-		Id:   todo.Id,
+		ID:   todo.ID,
 	}
 }
 
@@ -101,7 +101,7 @@ func (service *TodoServiceImpl) GetAll(ctx context.Context) []api.TodoResponse {
 
 	for _, todo := range todos {
 		todoResponses = append(todoResponses, api.TodoResponse{Name: todo.Name,
-			Id: todo.Id})
+			ID: todo.ID})
 	}
 
 	return todoResponses
@@ -115,14 +115,14 @@ func (service *TodoServiceImpl) GetAll(ctx context.Context) []api.TodoResponse {
 // @Success 200 {array} entity.Todo
 // @Param id path int true "Todo ID"
 // @Router /todo/{id} [get]
-func (service *TodoServiceImpl) GetById(ctx context.Context, todoId int) api.TodoResponse {
+func (service *TodoServiceImpl) GetById(ctx context.Context, todoId uint) api.TodoResponse {
 	todo, err := service.TodoRepository.GetById(ctx, service.DB, todoId)
 	if err != nil {
 		return api.TodoResponse{}
 	} else {
 		return api.TodoResponse{
 			Name: todo.Name,
-			Id:   todo.Id,
+			ID:   todo.ID,
 		}
 	}
 }

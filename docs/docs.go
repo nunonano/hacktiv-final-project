@@ -315,10 +315,19 @@ var doc = `{
         "entity.Todo": {
             "type": "object",
             "properties": {
+                "complete": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
                 "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
                     "type": "string"
                 }
             }
