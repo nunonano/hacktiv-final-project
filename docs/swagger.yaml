@@ -210,5 +210,5 @@ paths:
       tags:
       - todo
 schemes:
-- http
+- https
 swagger: "2.0"

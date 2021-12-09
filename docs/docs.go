@@ -349,7 +349,7 @@ var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
 	Host:        "",
 	BasePath:    "/api/v1",
-	Schemes:     []string{"http"},
+	Schemes:     []string{"https"},
 	Title:       "Hacktiv8 golang final project API",
 	Description: "This is a sample server.",
 }
