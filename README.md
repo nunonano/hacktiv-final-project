@@ -2,7 +2,7 @@
 
 ## demo api
 
-> http://hacktiv-final-project.herokuapp.com/api/v1/
+> https://hacktiv-final-project.herokuapp.com/api/v1/
 
 ## demo docs (swagger)
 
@@ -33,6 +33,6 @@ make run
 
 > http://<BASE_URL>/swagger/index.html
 
-# endpoint api
+## endpoint api
 
 > http://<BASE_URL>/api/v1/
