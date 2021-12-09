@@ -1,5 +1,13 @@
 # final-project
 
+## demo api
+
+> http://hacktiv-final-project.herokuapp.com/api/v1/
+
+## demo docs (swagger)
+
+> https://hacktiv-final-project.herokuapp.com/swagger/index.html
+
 ## library
 
 - go get github.com/gin-gonic/gin
