@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/nunonano/hacktiv-final-project/app"
 
 	oController "github.com/nunonano/hacktiv-final-project/controller/order"
@@ -40,5 +42,6 @@ func main() {
 
 	r := app.InitRouter(orderController, todoController)
 
-	r.Run(":8080")
+	PORT := os.Getenv("PORT")
+	r.Run(":" + PORT)
 }
