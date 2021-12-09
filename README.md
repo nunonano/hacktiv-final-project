@@ -1,15 +1,26 @@
 # final-project
 
-# run apps
+## library
 
-cmd: make run
+- go get github.com/gin-gonic/gin
+- go get github.com/swaggo/files
+- go get github.com/swaggo/gin-swagger
+- go get github.com/swaggo/swag
+- go get gorm.io/driver/postgres
+- go get gorm.io/gorm
+- go get golang.org/x/tools/go/internal/cgo@v0.1.0
+- go get github.com/mattn/go-isatty@v0.0.12
 
-# swagger
+## Starting Apps
 
-url => http://<BASE_URL>/swagger/index.html
+```
+make run
+```
 
-# api
+## Api docs ( Swagger )
 
-endpoint url => http://<BASE_URL>/api/v1/
+> http://<BASE_URL>/swagger/index.html
 
-# sample query
+# endpoint api
+
+> http://<BASE_URL>/api/v1/
