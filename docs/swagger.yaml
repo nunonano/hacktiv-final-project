@@ -1,0 +1,209 @@
+basePath: /api/v1
+definitions:
+  entity.Order:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  entity.Todo:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Hacktiv8 golang final project API
+  version: "1.0"
+paths:
+  /order:
+    get:
+      consumes:
+      - application/json
+      description: This is information about all orders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Order'
+            type: array
+      summary: Get All Order
+      tags:
+      - order
+    post:
+      consumes:
+      - application/json
+      description: Create Order Description
+      parameters:
+      - description: Input Data
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Order'
+            type: array
+      summary: Create Order
+      tags:
+      - order
+  /order/{id}:
+    get:
+      consumes:
+      - application/json
+      description: This is information about order
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Order'
+            type: array
+      summary: Get Order by ID
+      tags:
+      - order
+  /todo:
+    get:
+      consumes:
+      - application/json
+      description: This is information about all todos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Todo'
+            type: array
+      summary: Get All Todo
+      tags:
+      - todo
+    post:
+      consumes:
+      - application/json
+      description: Create Todo Description
+      parameters:
+      - description: Input Data
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Todo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Todo'
+            type: array
+      summary: Create Todo
+      tags:
+      - todo
+  /todo/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This is information about update todo
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Todo'
+            type: array
+      summary: Delete data Todo by ID
+      tags:
+      - todo
+    get:
+      consumes:
+      - application/json
+      description: This is information about todo
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Todo'
+            type: array
+      summary: Get Todo by ID
+      tags:
+      - todo
+    put:
+      consumes:
+      - application/json
+      description: This is information about update todo
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Data Todo
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Todo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Todo'
+            type: array
+      summary: Update data Todo by ID
+      tags:
+      - todo
+schemes:
+- http
+swagger: "2.0"

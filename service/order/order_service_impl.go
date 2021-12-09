@@ -22,6 +22,14 @@ func InitOrderService(orderRepository repository.OrderRepository, DB *gorm.DB) O
 	}
 }
 
+// @Tags order
+// @Summary Create Order
+// @Description Create Order Description
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Order
+// @Param id body entity.Order true "Input Data"
+// @Router /order [post]
 func (service *OrderServiceImpl) Create(ctx context.Context, request api.OrderCreateRequest) api.OrderResponse {
 
 	order := entity.Order{
@@ -36,6 +44,13 @@ func (service *OrderServiceImpl) Create(ctx context.Context, request api.OrderCr
 	}
 }
 
+// @Tags order
+// @Summary Get All Order
+// @Description This is information about all orders
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Order
+// @Router /order [get]
 func (service *OrderServiceImpl) GetAll(ctx context.Context) []api.OrderResponse {
 
 	var orderResponses []api.OrderResponse
@@ -50,6 +65,14 @@ func (service *OrderServiceImpl) GetAll(ctx context.Context) []api.OrderResponse
 	return orderResponses
 }
 
+// @Tags order
+// @Summary Get Order by ID
+// @Description This is information about order
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Order
+// @Param id path int true "Order ID"
+// @Router /order/{id} [get]
 func (service *OrderServiceImpl) GetById(ctx context.Context, orderId int) api.OrderResponse {
 	order, err := service.OrderRepository.GetById(ctx, service.DB, orderId)
 	if err != nil {

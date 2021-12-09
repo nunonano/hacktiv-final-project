@@ -22,6 +22,14 @@ func InitTodoService(todoRepository repository.TodoRepository, DB *gorm.DB) Todo
 	}
 }
 
+// @Tags todo
+// @Summary Delete data Todo by ID
+// @Description This is information about update todo
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Todo
+// @Param id path int true "Todo ID"
+// @Router /todo/{id} [delete]
 func (service *TodoServiceImpl) Delete(ctx context.Context, todoId int) api.TodoResponse {
 	todoId, err := service.TodoRepository.Delete(ctx, service.DB, todoId)
 	if err != nil {
@@ -33,6 +41,15 @@ func (service *TodoServiceImpl) Delete(ctx context.Context, todoId int) api.Todo
 	}
 }
 
+// @Tags todo
+// @Summary Update data Todo by ID
+// @Description This is information about update todo
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Todo
+// @Param id path int true "Todo ID"
+// @Param data body entity.Todo true "Update Data Todo"
+// @Router /todo/{id} [put]
 func (service *TodoServiceImpl) Update(ctx context.Context, todoId int, request api.TodoRequest) api.TodoResponse {
 
 	todo := entity.Todo{
@@ -47,6 +64,14 @@ func (service *TodoServiceImpl) Update(ctx context.Context, todoId int, request 
 	}
 }
 
+// @Tags todo
+// @Summary Create Todo
+// @Description Create Todo Description
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Todo
+// @Param id body entity.Todo true "Input Data"
+// @Router /todo [post]
 func (service *TodoServiceImpl) Create(ctx context.Context, request api.TodoRequest) api.TodoResponse {
 
 	todo := entity.Todo{
@@ -61,6 +86,13 @@ func (service *TodoServiceImpl) Create(ctx context.Context, request api.TodoRequ
 	}
 }
 
+// @Tags todo
+// @Summary Get All Todo
+// @Description This is information about all todos
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Todo
+// @Router /todo [get]
 func (service *TodoServiceImpl) GetAll(ctx context.Context) []api.TodoResponse {
 
 	var todoResponses []api.TodoResponse
@@ -75,6 +107,14 @@ func (service *TodoServiceImpl) GetAll(ctx context.Context) []api.TodoResponse {
 	return todoResponses
 }
 
+// @Tags todo
+// @Summary Get Todo by ID
+// @Description This is information about todo
+// @Accept json
+// @Produce json
+// @Success 200 {array} entity.Todo
+// @Param id path int true "Todo ID"
+// @Router /todo/{id} [get]
 func (service *TodoServiceImpl) GetById(ctx context.Context, todoId int) api.TodoResponse {
 	todo, err := service.TodoRepository.GetById(ctx, service.DB, todoId)
 	if err != nil {
