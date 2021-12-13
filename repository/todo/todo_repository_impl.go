@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"errors"
 
 	"github.com/nunonano/hacktiv-final-project/model/entity"
 
@@ -17,17 +18,18 @@ func InitCategoryRepository() TodoRepository {
 
 func (repository *TodoRepositoryImpl) Delete(ctx context.Context, db *gorm.DB, todoId uint) (uint, error) {
 	var todo entity.Todo
-	err := db.Delete(&todo, todoId).Error
-	if err != nil {
-		return todoId, err
+	if db.Delete(&todo, todoId).RowsAffected == 0 {
+		return todoId, errors.New("Delete Failed")
 	}
 	return todoId, nil
 }
 
-func (repository *TodoRepositoryImpl) Update(ctx context.Context, db *gorm.DB, todoId uint, todo entity.Todo) entity.Todo {
+func (repository *TodoRepositoryImpl) Update(ctx context.Context, db *gorm.DB, todoId uint, todo entity.Todo) (entity.Todo, error) {
 	todo.ID = todoId
-	db.Model(&todo).Where("id = ?", todoId).Updates(&todo)
-	return todo
+	if db.Model(&todo).Where("id = ?", todoId).Updates(&todo).RowsAffected == 0 {
+		return todo, errors.New("Update Failed")
+	}
+	return todo, nil
 }
 
 func (repository *TodoRepositoryImpl) Create(ctx context.Context, db *gorm.DB, todo entity.Todo) entity.Todo {

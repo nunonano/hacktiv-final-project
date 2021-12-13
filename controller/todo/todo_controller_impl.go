@@ -92,12 +92,20 @@ func (controller *TodoControllerImpl) Update(c *gin.Context) {
 
 	c.ShouldBindJSON(&TodoRequest)
 
-	todoResponse := controller.TodoService.Update(c, uint(id), TodoRequest)
+	todoResponse, err := controller.TodoService.Update(c, uint(id), TodoRequest)
 
-	apiResponse = api.ApiResponse{
-		Code:    http.StatusAccepted,
-		Message: "Updated",
-		Data:    todoResponse,
+	if err != nil {
+		apiResponse = api.ApiResponse{
+			Code:    http.StatusBadRequest,
+			Message: err.Error(),
+			Data:    nil,
+		}
+	} else {
+		apiResponse = api.ApiResponse{
+			Code:    http.StatusAccepted,
+			Message: "Updated",
+			Data:    todoResponse,
+		}
 	}
 
 	c.JSON(apiResponse.Code, apiResponse)
@@ -115,12 +123,22 @@ func (controller *TodoControllerImpl) Delete(c *gin.Context) {
 			Data:    nil,
 		}
 	} else {
-		todo := controller.TodoService.Delete(c, uint(id))
-		apiResponse = api.ApiResponse{
-			Code:    http.StatusAccepted,
-			Message: "Deleted",
-			Data:    todo,
+		todo, err := controller.TodoService.Delete(c, uint(id))
+
+		if err != nil {
+			apiResponse = api.ApiResponse{
+				Code:    http.StatusBadRequest,
+				Message: err.Error(),
+				Data:    nil,
+			}
+		} else {
+			apiResponse = api.ApiResponse{
+				Code:    http.StatusAccepted,
+				Message: "Deleted",
+				Data:    todo,
+			}
 		}
+
 	}
 
 	c.JSON(apiResponse.Code, apiResponse)

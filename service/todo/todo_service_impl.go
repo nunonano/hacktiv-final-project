@@ -30,15 +30,16 @@ func InitTodoService(todoRepository repository.TodoRepository, DB *gorm.DB) Todo
 // @Success 200 {array} entity.Todo
 // @Param id path int true "Todo ID"
 // @Router /todo/{id} [delete]
-func (service *TodoServiceImpl) Delete(ctx context.Context, todoId uint) api.TodoResponse {
+func (service *TodoServiceImpl) Delete(ctx context.Context, todoId uint) (api.TodoResponse, error) {
 	todoId, err := service.TodoRepository.Delete(ctx, service.DB, todoId)
+
 	if err != nil {
-		return api.TodoResponse{}
-	} else {
-		return api.TodoResponse{
-			ID: todoId,
-		}
+		return api.TodoResponse{}, err
 	}
+
+	return api.TodoResponse{
+		ID: todoId,
+	}, nil
 }
 
 // @Tags todo
@@ -50,18 +51,22 @@ func (service *TodoServiceImpl) Delete(ctx context.Context, todoId uint) api.Tod
 // @Param id path int true "Todo ID"
 // @Param data body entity.Todo true "Update Data Todo"
 // @Router /todo/{id} [put]
-func (service *TodoServiceImpl) Update(ctx context.Context, todoId uint, request api.TodoRequest) api.TodoResponse {
+func (service *TodoServiceImpl) Update(ctx context.Context, todoId uint, request api.TodoRequest) (api.TodoResponse, error) {
 
 	todo := entity.Todo{
 		Name: request.Name,
 	}
 
-	todo = service.TodoRepository.Update(ctx, service.DB, todoId, todo)
+	todo, err := service.TodoRepository.Update(ctx, service.DB, todoId, todo)
+
+	if err != nil {
+		return api.TodoResponse{}, err
+	}
 
 	return api.TodoResponse{
 		Name: todo.Name,
 		ID:   todo.ID,
-	}
+	}, nil
 }
 
 // @Tags todo

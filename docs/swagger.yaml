@@ -209,6 +209,4 @@ paths:
       summary: Update data Todo by ID
       tags:
       - todo
-schemes:
-- https
 swagger: "2.0"

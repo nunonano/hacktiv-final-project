@@ -1,9 +1,8 @@
 package main
 
 import (
-	"os"
-
 	"github.com/nunonano/hacktiv-final-project/app"
+	"github.com/nunonano/hacktiv-final-project/helper"
 
 	oController "github.com/nunonano/hacktiv-final-project/controller/order"
 	oRepository "github.com/nunonano/hacktiv-final-project/repository/order"
@@ -27,7 +26,6 @@ import (
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @BasePath /api/v1
-// @schemes https
 func main() {
 	db := app.InitDB()
 
@@ -41,7 +39,6 @@ func main() {
 
 	r := app.InitRouter(orderController, todoController)
 
-	// PORT := "8080"
-	PORT := os.Getenv("PORT")
+	PORT := helper.GetEnvVariable("PORT")
 	r.Run(":" + PORT)
 }
